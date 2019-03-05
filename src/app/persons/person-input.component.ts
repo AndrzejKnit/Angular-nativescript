@@ -1,4 +1,3 @@
-
 import { Component } from '@angular/core';
 
 @Component({
@@ -9,4 +8,8 @@ import { Component } from '@angular/core';
 
 export class PersonInputComponent {
 
+  onCreatePerson(personName: string) {
+
+    console.log('Create a person: ' + personName);
+  }
 }
