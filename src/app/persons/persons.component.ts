@@ -1,6 +1,7 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
 import { PersonsService } from './person.service';
 import { Subscription } from 'rxjs';
+import { allSettled } from 'q';
 
 @Component({
   selector: 'app-persons',
@@ -9,6 +10,7 @@ import { Subscription } from 'rxjs';
 
 export class PersonsComponent implements OnInit, OnDestroy {
  personList: string[];
+ isFetching = true;
  private personListSubs: Subscription;
 // private personService: PersonsService;
 
@@ -21,7 +23,9 @@ export class PersonsComponent implements OnInit, OnDestroy {
    this.prsService.fetchPersons();
    this.personListSubs = this.prsService.personChanged.subscribe(persons => {
      this.personList = persons;
+     this.isFetching = false;
    });
+   this.isFetching = true;
    this.prsService.fetchPersons();
  }
 
